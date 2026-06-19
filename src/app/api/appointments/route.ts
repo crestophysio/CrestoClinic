@@ -235,7 +235,7 @@ export async function POST(req: NextRequest) {
         }),
         sendEmail({
           to: data.email,
-          subject: `Sugam Clinic - Appointment Request Received`,
+          subject: `Cresto Physiotherapy Clinic - Appointment Request Received`,
           html: renderEmail({
             title: "We've received your appointment request",
             previewText: "Your appointment request has been received",
@@ -243,7 +243,7 @@ export async function POST(req: NextRequest) {
               <p style="margin:0 0 12px;">Dear ${esc(data.name)},</p>
               <p style="margin:0 0 8px;">Thank you for choosing us. We have received your booking request and our staff will contact you shortly to confirm.</p>
               ${infoTable(
-                infoRow("Doctor", doctorName) +
+                infoRow("Therapist", doctorName) +
                 infoRow("Date", data.date) +
                 infoRow("Time slot", data.time) +
                 infoRow("Status", "Pending confirmation")
@@ -280,7 +280,7 @@ export async function PUT(req: NextRequest) {
       // Send update email to patient
       await sendEmail({
         to: appointment.email,
-        subject: `Sugam Clinic - Appointment ${status}`,
+        subject: `Cresto Physiotherapy Clinic - Appointment ${status}`,
         html: renderEmail({
           title: "Appointment status update",
           previewText: `Your appointment is now ${status}`,
@@ -288,7 +288,7 @@ export async function PUT(req: NextRequest) {
             <p style="margin:0 0 12px;">Dear ${esc(appointment.name)},</p>
             <p style="margin:0 0 8px;">Your appointment status has been updated to <strong>${esc(status)}</strong>.</p>
             ${infoTable(
-              infoRow("Doctor", appointment.doctor ? appointment.doctor.name : "Clinic Doctor") +
+              infoRow("Therapist", appointment.doctor ? appointment.doctor.name : "Clinic Therapist") +
               infoRow("Date", appointment.date) +
               infoRow("Time", appointment.time) +
               infoRow("Status", status)

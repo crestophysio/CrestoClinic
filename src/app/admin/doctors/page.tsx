@@ -30,6 +30,12 @@ export default function AdminDoctorsPage() {
   });
 
   useEffect(() => {
+    if (!contextDoctors || contextDoctors.length === 0) {
+      fetchDoctors();
+    }
+  }, [contextDoctors, fetchDoctors]);
+
+  useEffect(() => {
     if (contextDoctors && contextDoctors.length > 0) {
       setDoctors(contextDoctors);
       setLoading(false);

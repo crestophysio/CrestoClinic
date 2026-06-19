@@ -21,6 +21,12 @@ export default function AdminGalleryPage() {
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
+    if (!contextGallery || contextGallery.length === 0) {
+      fetchGallery();
+    }
+  }, [contextGallery, fetchGallery]);
+
+  useEffect(() => {
     if (contextGallery && contextGallery.length > 0) {
       setImages(contextGallery);
       setLoading(false);

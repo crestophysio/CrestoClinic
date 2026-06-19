@@ -27,6 +27,12 @@ export default function AdminBlogsPage() {
   });
 
   useEffect(() => {
+    if (!contextBlogs || contextBlogs.length === 0) {
+      fetchBlogs();
+    }
+  }, [contextBlogs, fetchBlogs]);
+
+  useEffect(() => {
     if (contextBlogs && contextBlogs.length > 0) {
       setBlogs(contextBlogs);
       setLoading(false);

@@ -199,19 +199,9 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Pre-load all critical admin data on mount
+  // Only load essential settings on mount to avoid blocking serverless function cold starts with 9 parallel DB queries
   useEffect(() => {
-    Promise.all([
-      fetchSettings(),
-      fetchDoctors(),
-      fetchGallery(),
-      fetchBlogs(),
-      fetchServices(),
-      fetchAppointments(),
-      fetchReviews(),
-      fetchMessages(),
-      fetchFaqs(),
-    ]).catch(err => console.error("Initial context loading failed:", err));
+    fetchSettings();
   }, []);
 
   return (
