@@ -52,14 +52,30 @@ export const authOptions: NextAuthOptions = {
         // runs. (A credentials provider cannot emit a raw 429; the throttle is
         // enforced here — front with a custom route if a true 429 is required.)
         const ip = loginClientIp(req?.headers as Record<string, string | undefined> | undefined);
-        const limit = await rateLimit(`login:ip:${ip}`, 5, 10 * 60 * 1000);
-        if (!limit.ok) {
-          throw new Error("Too many login attempts. Please wait a few minutes and try again.");
+        try {
+          const limit = await Promise.race([
+            rateLimit(`login:ip:${ip}`, 5, 10 * 60 * 1000),
+            new Promise<any>((_, reject) => setTimeout(() => reject(new Error("Rate limit timeout")), 2500))
+          ]);
+          if (limit && !limit.ok) {
+            throw new Error("Too many login attempts. Please wait a few minutes and try again.");
+          }
+        } catch (rlError) {
+          console.error("Rate limiting bypassed or timed out:", rlError);
         }
 
         // DB-backed (with one-time env bootstrap) so a reset password takes
         // effect. Existing env credentials keep working until first login.
-        await connectToDatabase();
+        try {
+          await Promise.race([
+            connectToDatabase(),
+            new Promise<any>((_, reject) => setTimeout(() => reject(new Error("Database connection timeout")), 5000))
+          ]);
+        } catch (dbError) {
+          console.error("Database connection failed during login:", dbError);
+          throw new Error("Database connection failed. Please try again.");
+        }
+
         const ok = await verifyAdminCredentials(credentials.email, credentials.password);
         if (!ok) return null;
 
