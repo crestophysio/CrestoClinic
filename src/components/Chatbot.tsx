@@ -1,0 +1,174 @@
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
+import { useFocusTrap } from "@/lib/useFocusTrap";
+
+interface ChatbotProps {
+  settings: any;
+  doctors: any[];
+}
+
+interface Message {
+  sender: "bot" | "user";
+  text: string;
+}
+
+export default function Chatbot({ settings, doctors }: ChatbotProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      sender: "bot",
+      text: "Hello! I am Cresto Assistant. How can I help you today? You can ask me about our physiotherapists, clinic timings, services, treatment options, or how to book an appointment.",
+    },
+  ]);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const replyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const trapRef = useFocusTrap<HTMLDivElement>(isOpen);
+
+  useEffect(() => {
+    const handleToggle = () => setIsOpen((prev) => !prev);
+    window.addEventListener("toggle-chatbot", handleToggle);
+    return () => window.removeEventListener("toggle-chatbot", handleToggle);
+  }, []);
+
+  // Close the chat panel on Esc for keyboard users.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
+  // Clear any pending reply timer on unmount so we don't setState after unmount.
+  useEffect(() => {
+    return () => {
+      if (replyTimer.current) clearTimeout(replyTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, isOpen]);
+
+  const handleSend = () => {
+    if (!input.trim() || loading) return;
+
+    const userText = input.trim();
+    setMessages((prev) => [...prev, { sender: "user", text: userText }]);
+    setInput("");
+    setLoading(true);
+
+    // Simulate AI thinking and response
+    replyTimer.current = setTimeout(() => {
+      const lower = userText.toLowerCase();
+      let reply = "";
+
+      if (lower.includes("doctor") || lower.includes("therapist") || lower.includes("specialist") || lower.includes("who is")) {
+        const docNames = doctors.map((d) => d.name).join(", ");
+        reply = `Our clinic has experienced physiotherapists: ${docNames}. They specialise in Manual Therapy, Neurological Rehab, Sports Injury, and Post-Surgical Recovery.`;
+      } else if (lower.includes("time") || lower.includes("hour") || lower.includes("when") || lower.includes("open")) {
+        reply = `Cresto Physiotherapy Clinic is open: ${settings?.workingHours || "Mon - Sat: 9:00 AM - 7:00 PM"}.`;
+      } else if (lower.includes("book") || lower.includes("appointment") || lower.includes("schedule")) {
+        reply = "To book an appointment, scroll to our Booking Form on the webpage, click the WhatsApp button, or call us at " + (settings?.phone || "+91 98765 43210") + ".";
+      } else if (lower.includes("physio") || lower.includes("pain") || lower.includes("rehab") || lower.includes("injury") || lower.includes("back") || lower.includes("neck")) {
+        reply = "We offer specialised physiotherapy for back pain, neck pain, sports injuries, neurological conditions, post-surgical rehabilitation, and posture correction. Book a consultation with our expert team.";
+      } else if (lower.includes("neuro") || lower.includes("stroke") || lower.includes("parkinson")) {
+        reply = "Dr. Jeba specialises in Neurological Rehabilitation for stroke recovery, Parkinson's disease, spinal cord conditions, and other neurological disorders.";
+      } else if (lower.includes("contact") || lower.includes("number") || lower.includes("phone") || lower.includes("email") || lower.includes("address")) {
+        reply = `You can call us at ${settings?.phone || "+91 98765 43210"}, email us at ${settings?.email || "info@crestophysio.com"}, or visit us at ${settings?.address || "No.70/1, Benaka Plaza, Bannerghatta Road, Bengaluru"}.`;
+      } else {
+        reply = "Thank you for reaching out. Our physiotherapy specialists treat all musculoskeletal, neurological, and sports-related conditions. Please book a consultation or call us at " + (settings?.phone || "+91 98765 43210") + " for expert guidance.";
+      }
+
+      setMessages((prev) => [...prev, { sender: "bot", text: reply }]);
+      setLoading(false);
+    }, 800);
+  };
+
+  return (
+    <>
+      {/* Chat Window Panel */}
+      {isOpen && (
+        <div ref={trapRef} role="dialog" aria-modal="false" aria-label="Cresto Assistant chat" className="fixed z-[60] bottom-24 right-6 sm:bottom-6 sm:right-24 w-[calc(100vw-3rem)] max-w-[360px] sm:w-[380px] h-[480px] max-h-[calc(100vh-8rem)] bg-white rounded-3xl border border-brand-border shadow-2xl flex flex-col overflow-hidden animate-fadeIn">
+          {/* Header */}
+          <div className="bg-teal p-5 text-white flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h4 className="font-heading font-bold text-sm leading-tight">Cresto Assistant</h4>
+                <p className="text-[10px] text-teal-tint font-medium">Online | AI Inquiry Agent</p>
+              </div>
+            </div>
+            <button onClick={() => setIsOpen(false)} aria-label="Close chat" className="text-white/80 hover:text-white">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Messages Area */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-brand-cream/10">
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`flex gap-2.5 ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}
+              >
+                {/* Avatar */}
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${msg.sender === "user" ? "bg-pink text-white" : "bg-teal-tint text-teal-dark border border-teal/20"
+                  }`}>
+                  {msg.sender === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                </div>
+
+                {/* Message Body */}
+                <div className={`max-w-[75%] p-3.5 rounded-2xl text-xs leading-relaxed ${msg.sender === "user"
+                    ? "bg-pink text-white rounded-tr-none"
+                    : "bg-white border border-brand-border text-brand-ink rounded-tl-none shadow-sm"
+                  }`}>
+                  {msg.text}
+                </div>
+              </div>
+            ))}
+
+            {loading && (
+              <div className="flex gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-teal-tint text-teal-dark flex items-center justify-center shrink-0">
+                  <Bot className="w-4 h-4" />
+                </div>
+                <div className="bg-white border border-brand-border p-3.5 rounded-2xl rounded-tl-none shadow-sm">
+                  <Loader2 className="w-4 h-4 animate-spin text-teal" />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Area */}
+          <div className="p-4 border-t border-brand-border bg-white flex items-center gap-2 shrink-0">
+            <input
+              type="text"
+              placeholder="Ask me something..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              className="flex-1 px-4 py-2.5 border border-brand-border rounded-xl focus:outline-none focus:border-teal text-xs text-brand-ink"
+            />
+            <button
+              onClick={handleSend}
+              disabled={loading}
+              aria-label="Send message"
+              className="bg-teal hover:bg-teal-dark text-white p-2.5 rounded-xl transition-colors shadow-sm active:scale-95 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Send className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

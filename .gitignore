@@ -1,0 +1,12 @@
+node_modules
+.next
+.env
+.env.local
+
+# build artifacts
+*.tsbuildinfo
+
+# test output
+/test-results
+/playwright-report
+/coverage
