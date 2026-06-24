@@ -5,9 +5,7 @@ import { Providers } from "@/components/Providers";
 import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import { unstable_cache } from "next/cache";
-import { connectToDatabase } from "@/lib/db";
-import ClinicSettings from "@/models/ClinicSettings";
+import { getLayoutSettings } from "@/lib/layoutSettings";
 import { KEYWORDS } from "@/lib/seo";
 
 const outfit = Outfit({
@@ -92,25 +90,6 @@ export const metadata: Metadata = {
   },
   formatDetection: { telephone: true, email: true, address: true },
 };
-
-const getLayoutSettings = unstable_cache(
-  async () => {
-    try {
-      await connectToDatabase();
-      return await ClinicSettings.findOne()
-        .select("clinicName logo favicon phone whatsapp email address workingHours facebook instagram youtube linkedin createdAt updatedAt")
-        .lean();
-    } catch (err) {
-      console.error("Layout settings load err:", err);
-      return null;
-    }
-  },
-  ["public-layout-settings"],
-  // Tagged so an admin settings save can bust this immediately via
-  // revalidateTag(); without the tag, revalidatePath() leaves this
-  // unstable_cache entry stale (footer/navbar show old info until the 300s TTL).
-  { revalidate: 300, tags: ["public-layout-settings"] }
-);
 
 export default async function RootLayout({
   children,
