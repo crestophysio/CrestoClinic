@@ -3,8 +3,11 @@
 // AI crawlers read them without executing JS. All builders return plain objects
 // that get serialized by the <JsonLd> component.
 
+// Default to the production domain so a missing/forgotten NEXT_PUBLIC_SITE_URL
+// in prod never emits localhost canonicals/OG URLs. Matches sitemap.ts +
+// robots.ts. Local dev overrides this via .env (NEXT_PUBLIC_SITE_URL=localhost).
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://crestophysio.com"
 ).replace(/\/+$/, "");
 
 export const SITE_NAME = "Cresto Physiotherapy Clinic";
@@ -12,7 +15,10 @@ export const SITE_NAME = "Cresto Physiotherapy Clinic";
 export const SITE_DESCRIPTION =
   "Expert physiotherapy, manual therapy, neurological rehabilitation, and sports injury treatment in Bengaluru. Book your appointment at Cresto Physiotherapy Clinic on Bannerghatta Road.";
 
-export const DEFAULT_OG_IMAGE = "/hero-logo-desktop.jpg";
+// Fallback social/JSON-LD image. Points at the generated OG route (see
+// app/opengraph-image.tsx) so it resolves to a real image even when the admin
+// hasn't uploaded a logo/hero in Settings. Those DB values override it when set.
+export const DEFAULT_OG_IMAGE = "/opengraph-image";
 
 // Real clinic location — used in PostalAddress schema + as the default address
 // when the DB settings record is sparse. Drives local "near me" / city ranking.

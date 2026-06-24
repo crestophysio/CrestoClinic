@@ -62,20 +62,13 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteSocialDescription,
     siteName: siteTitle,
-    images: [
-      {
-        url: "/hero-logo-desktop.jpg",
-        width: 1200,
-        height: 630,
-        alt: siteTitle,
-      },
-    ],
+    // OG image supplied by the generated app/opengraph-image.tsx convention.
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
     description: siteSocialDescription,
-    images: ["/hero-logo-desktop.jpg"],
+    // Image supplied by the generated app/twitter-image.tsx convention.
   },
   robots: {
     index: true,
