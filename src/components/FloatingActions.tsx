@@ -117,7 +117,7 @@ export default function FloatingActions({ settings }: FloatingActionsProps) {
       </div>
 
       {/* Desktop/Tablet Docked Vertical Sidebar on the Right Edge */}
-      <div className="hidden sm:flex flex-col items-center gap-4 fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-white/30 backdrop-blur-lg border-l border-y border-white/20 shadow-2xl rounded-l-2xl py-5 px-3 w-16">
+      <div className="hidden sm:flex flex-col items-center gap-3 fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-white/30 backdrop-blur-lg border-l border-y border-white/20 shadow-2xl rounded-l-2xl py-4 px-2.5 w-14">
         
         {/* Vertical Text Label */}
         <div className="[writing-mode:vertical-rl] rotate-180 font-heading font-black tracking-widest text-[9px] text-brand-muted uppercase select-none mb-3 whitespace-nowrap">
@@ -127,19 +127,19 @@ export default function FloatingActions({ settings }: FloatingActionsProps) {
         {/* Action Button 1: Emergency Call (Pink) */}
         <a
           href={callUrl}
-          className="w-10 h-10 rounded-xl bg-pink hover:bg-pink-hover text-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+          className="w-8 h-8 rounded-xl bg-pink hover:bg-pink-hover text-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
           title="Call Clinic Emergency"
         >
-          <PhoneIcon className="w-4.5 h-4.5 animate-pulse" />
+          <PhoneIcon className="w-4 h-4 animate-pulse" />
         </a>
 
         {/* Action Button 2: Chatbot Assistant (Green) */}
         <button
           onClick={() => window.dispatchEvent(new CustomEvent("toggle-chatbot"))}
-          className="w-10 h-10 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+          className="w-8 h-8 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
           title="Chat with Assistant"
         >
-          <ChatbotIcon className="w-4.5 h-4.5" />
+          <ChatbotIcon className="w-4 h-4" />
         </button>
 
         {/* Action Button 3: WhatsApp Support (Teal) */}
@@ -147,10 +147,10 @@ export default function FloatingActions({ settings }: FloatingActionsProps) {
           href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-10 h-10 rounded-xl bg-teal hover:bg-teal-dark text-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+          className="w-8 h-8 rounded-xl bg-teal hover:bg-teal-dark text-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
           title="WhatsApp Chat"
         >
-          <WhatsAppIcon className="w-4.5 h-4.5" />
+          <WhatsAppIcon className="w-4 h-4" />
         </a>
 
       </div>
