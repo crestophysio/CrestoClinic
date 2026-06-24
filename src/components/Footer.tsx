@@ -31,6 +31,7 @@ export default function Footer({ settings, lang }: FooterProps) {
               {settings?.facebook && (
                 <a
                   href={settings.facebook}
+                  aria-label="Cresto Physiotherapy on Facebook"
                   target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-pink hover:text-white transition-all duration-300"
@@ -41,6 +42,7 @@ export default function Footer({ settings, lang }: FooterProps) {
               {settings?.instagram && (
                 <a
                   href={settings.instagram}
+                  aria-label="Cresto Physiotherapy on Instagram"
                   target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-pink hover:text-white transition-all duration-300"
@@ -51,6 +53,7 @@ export default function Footer({ settings, lang }: FooterProps) {
               {settings?.youtube && (
                 <a
                   href={settings.youtube}
+                  aria-label="Cresto Physiotherapy on YouTube"
                   target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-pink hover:text-white transition-all duration-300"
@@ -61,6 +64,7 @@ export default function Footer({ settings, lang }: FooterProps) {
               {settings?.linkedin && (
                 <a
                   href={settings.linkedin}
+                  aria-label="Cresto Physiotherapy on LinkedIn"
                   target="_blank"
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-pink hover:text-white transition-all duration-300"

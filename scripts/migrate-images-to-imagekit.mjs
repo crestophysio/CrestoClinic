@@ -53,7 +53,7 @@ async function uploadOne(dataUrl, fileName) {
   const res = await ik.upload({
     file: dataUrl,
     fileName,
-    folder: "/sugam-clinic/migrated",
+    folder: "/cresto-clinic/migrated",
     useUniqueFileName: true,
   });
   return res.url;

@@ -22,7 +22,7 @@ export default function AdminBlogsPage() {
     content: "",
     category: "General Health",
     image: "",
-    author: "Sugam Specialist",
+    author: "Cresto Physiotherapy",
     tagsString: "",
   });
 
@@ -54,7 +54,7 @@ export default function AdminBlogsPage() {
       content: "",
       category: "General Health",
       image: "",
-      author: "Sugam Specialist",
+      author: "Cresto Physiotherapy",
       tagsString: "",
     });
     setShowModal(true);
@@ -67,7 +67,7 @@ export default function AdminBlogsPage() {
       content: post.content,
       category: post.category || "General Health",
       image: post.image || "",
-      author: post.author || "Sugam Specialist",
+      author: post.author || "Cresto Physiotherapy",
       tagsString: post.tags ? post.tags.join(", ") : "",
     });
     setShowModal(true);
@@ -138,7 +138,7 @@ export default function AdminBlogsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-heading font-bold text-3xl text-slate-800">Health Tips Blog</h1>
-          <p className="text-sm text-slate-500 mt-1">Publish informative guidelines, newborn tips, and dietary recommendations.</p>
+          <p className="text-sm text-slate-500 mt-1">Publish physiotherapy guidance, recovery exercises, and rehabilitation tips.</p>
         </div>
         <button
           onClick={handleOpenAdd}
@@ -206,7 +206,7 @@ export default function AdminBlogsPage() {
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  placeholder="e.g. Newborn Feeding Routines"
+                  placeholder="e.g. 5 Exercises to Relieve Back Pain"
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
                 />
               </div>
@@ -220,7 +220,7 @@ export default function AdminBlogsPage() {
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
-                    placeholder="e.g. Pediatric Gastro"
+                    placeholder="e.g. Back & Spine"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
                   />
                 </div>
@@ -253,7 +253,7 @@ export default function AdminBlogsPage() {
                     name="tagsString"
                     value={formData.tagsString}
                     onChange={handleInputChange}
-                    placeholder="newborn, nutrition, milestones"
+                    placeholder="back pain, rehab, exercises"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
                   />
                 </div>

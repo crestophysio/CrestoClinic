@@ -17,9 +17,9 @@ const ClinicSettingsSchema = new Schema(
     instagram: { type: String, default: "" },
     youtube: { type: String, default: "" },
     linkedin: { type: String, default: "" },
-    seoTitle: { type: String, default: "Cresto Physiotherapy Clinic - Expert Physio & Rehabilitation in Bengaluru" },
-    seoDescription: { type: String, default: "Expert physiotherapy, manual therapy, neurological rehabilitation and sports injury treatment in Bengaluru at Cresto Physiotherapy Clinic." },
-    seoKeywords: { type: String, default: "physiotherapy, rehabilitation, manual therapy, sports injury, neuro physio, Bengaluru, Bannerghatta Road, Cresto physio" },
+    seoTitle: { type: String, default: "Best Physiotherapy in Bengaluru | Cresto Clinic" },
+    seoDescription: { type: String, default: "Expert physiotherapy in Bengaluru. Cresto Physiotherapy Clinic on Bannerghatta Road offers pain relief, rehab & sports therapy. Book your visit today!" },
+    seoKeywords: { type: String, default: "physiotherapy Bannerghatta Road, physiotherapist in Bengaluru, best physiotherapy clinic in Bengaluru, physiotherapy near me, back pain physiotherapy Bengaluru, knee pain physiotherapy Bengaluru, neck pain physiotherapy Bengaluru, sciatica treatment Bengaluru, frozen shoulder treatment Bengaluru, sports injury rehabilitation Bengaluru, neurological physiotherapy Bengaluru, stroke rehabilitation Bengaluru, post-surgical rehabilitation Bengaluru, manual therapy Bengaluru, dry needling Bengaluru, electrotherapy Bengaluru, posture correction Bengaluru, home visit physiotherapy Bengaluru, physiotherapy Doddakammanahalli, Cresto Physiotherapy Clinic" },
     ogImage: { type: String, default: "" },
 
     // About section content. Blank = fall back to the per-language defaults in

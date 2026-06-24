@@ -8,7 +8,6 @@ import {
   Clock,
   Phone,
   Mail,
-  Baby,
   Calendar,
   Trash2,
   Search,
@@ -184,7 +183,6 @@ export default function AdminAppointmentsPage() {
       appt.name?.toLowerCase().includes(q) ||
       appt.phone?.toLowerCase().includes(q) ||
       appt.email?.toLowerCase().includes(q) ||
-      appt.childName?.toLowerCase().includes(q) ||
       appt.visitReason?.toLowerCase().includes(q)
     );
   };
@@ -267,7 +265,6 @@ export default function AdminAppointmentsPage() {
     const headers = [
       "Name", "Phone", "Email", "Date", "Time", "Doctor", "Specialization",
       "Status", "Visit Reason", "Symptoms", "Additional Notes",
-      "Is Child", "Child Name", "Child DOB", "Vaccination Reminders",
       "Message", "Booked On",
     ];
     const esc = (v: any) => {
@@ -284,8 +281,7 @@ export default function AdminAppointmentsPage() {
         a.name, a.phone, a.email, a.date, a.time,
         a.doctor?.name || "", a.doctor?.specialization || "",
         a.status, a.visitReason || "", a.symptoms || "", a.additionalNotes || "",
-        a.isChild ? "Yes" : "No", a.childName || "", a.childDob || "",
-        a.vaccinationReminderEnabled ? "Yes" : "No", a.message || "",
+        a.message || "",
         a.createdAt ? new Date(a.createdAt).toLocaleString() : "",
       ].map(esc).join(",")
     );
@@ -499,7 +495,6 @@ export default function AdminAppointmentsPage() {
                   <th className="p-6 font-semibold">Patient Information</th>
                   <th className="p-6 font-semibold">Booking Slot</th>
                   <th className="p-6 font-semibold">Specialist Doctor</th>
-                  <th className="p-6 font-semibold">Child Module / reminders</th>
                   <th className="p-6 font-semibold">Status</th>
                   <th className="p-6 font-semibold text-right">Actions</th>
                 </tr>
@@ -594,27 +589,6 @@ export default function AdminAppointmentsPage() {
                               </>
                             ) : (
                               "Doctor details missing"
-                            )}
-                          </td>
-
-                          {/* Pediatric Module */}
-                          <td className="p-6">
-                            {appt.isChild ? (
-                              <div className="bg-teal-tint/40 border border-teal/10 p-3 rounded-xl max-w-[200px]">
-                                <p className="font-bold text-teal-dark text-[10px] uppercase flex items-center gap-1 mb-1">
-                                  <Baby className="w-3.5 h-3.5 text-teal" />
-                                  Child profile
-                                </p>
-                                <p className="text-slate-800 font-semibold">{appt.childName}</p>
-                                <p className="text-[9px] text-slate-400 mt-0.5">DOB: {appt.childDob}</p>
-                                {appt.vaccinationReminderEnabled && (
-                                  <span className="mt-1.5 inline-block bg-teal-dark text-white text-[8px] font-bold px-1.5 py-0.5 rounded">
-                                    Reminders Active
-                                  </span>
-                                )}
-                              </div>
-                            ) : (
-                              <span className="text-slate-400">Adult consult</span>
                             )}
                           </td>
 

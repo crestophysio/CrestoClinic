@@ -8,26 +8,32 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { unstable_cache } from "next/cache";
 import { connectToDatabase } from "@/lib/db";
 import ClinicSettings from "@/models/ClinicSettings";
+import { KEYWORDS } from "@/lib/seo";
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
-  weight: ["300", "400", "500", "600", "700"],
+  // 300 dropped — no `font-light` usage in the app. Fewer weights = fewer files.
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
+  // Space Grotesk only ships 300–700; 800 (font-extrabold) is synthesised by the
+  // browser. next/font's adjustFontFallback keeps the metric delta small.
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://crestophysio.com").replace(/\/+$/, "");
 const siteTitle = "Cresto Physiotherapy Clinic";
-// Homepage <title> — leads with top commercial + local keywords.
-const homeTitle =
-  "Physiotherapy in Bengaluru | Cresto Physiotherapy Clinic – Bannerghatta Road";
+// Homepage <title> — top commercial + local terms, kept under ~50 chars so it
+// never truncates in the SERP (from the local SEO keyword pack).
+const homeTitle = "Best Physiotherapy in Bengaluru | Cresto Clinic";
 const siteDescription =
-  "Expert physiotherapy, manual therapy, neurological rehabilitation, and sports injury treatment in Bengaluru. Book your appointment at Cresto Physiotherapy Clinic on Bannerghatta Road.";
+  "Expert physiotherapy in Bengaluru. Cresto Physiotherapy Clinic on Bannerghatta Road offers pain relief, rehab & sports therapy. Book your visit today!";
 // Question-led variant — higher click-through on social shares.
 const siteSocialDescription =
   "Looking for a physiotherapist in Bengaluru? Cresto Physiotherapy Clinic on Bannerghatta Road offers expert manual therapy, neuro rehab, sports injury treatment, post-surgical recovery, and posture care. Book your consultation today.";
@@ -40,27 +46,16 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: siteTitle,
-  keywords: [
-    "Cresto Physiotherapy Bengaluru",
-    "physiotherapist in Bengaluru",
-    "physiotherapy Bannerghatta Road",
-    "manual therapy Bengaluru",
-    "neurological rehabilitation Bengaluru",
-    "sports injury treatment Bengaluru",
-    "post-surgical rehab Bengaluru",
-    "electrotherapy Bengaluru",
-    "back pain treatment Bengaluru",
-    "neck pain physiotherapy Bengaluru",
-    "stroke rehabilitation Bengaluru",
-    "Parkinson physiotherapy Bengaluru",
-    "physiotherapy near me Bengaluru",
-    "ACL rehab Bengaluru",
-    "knee replacement rehab Bengaluru",
-    "posture correction Bengaluru",
-    "Cresto physio Doddakammanahalli",
-    "physio Begur Hobli",
-    "physiotherapy clinic Bengaluru",
-  ],
+  // Composed from the keyword pack: brand/local + top conditions + "near me" +
+  // commercial intent. De-duped so repeated terms across groups appear once.
+  keywords: Array.from(
+    new Set([
+      ...KEYWORDS.brandLocal,
+      ...KEYWORDS.conditions.slice(0, 10),
+      ...KEYWORDS.local.slice(0, 8),
+      ...KEYWORDS.commercial.slice(0, 6),
+    ])
+  ),
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -123,7 +118,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const settings: any = await getLayoutSettings();
-  const faviconUrl = settings?.favicon || "/favicon.ico";
+  // Favicon: prefer an explicit favicon, else reuse the header logo, else the
+  // static fallback. Keeps the tab icon in sync with the brand logo by default.
+  const faviconUrl = settings?.favicon || settings?.logo || "/favicon.ico";
   const serializedSettings = settings ? JSON.parse(JSON.stringify(settings)) : null;
 
   return (
@@ -136,7 +133,10 @@ export default async function RootLayout({
           <PublicLayoutWrapper settings={serializedSettings}>
             {children}
           </PublicLayoutWrapper>
-          <SpeedInsights />
+          {/* Vercel injects /_vercel/speed-insights/script.js only on Vercel.
+              Off-Vercel (local dev, self-host) that route 404s and the client
+              logs a "Failed to load script" error — so only mount on Vercel. */}
+          {process.env.VERCEL && <SpeedInsights />}
         </Providers>
       </body>
     </html>

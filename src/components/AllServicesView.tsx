@@ -45,7 +45,7 @@ export default function AllServicesView({ services }: AllServicesViewProps) {
               Our Medical Services
             </h1>
             <p className="text-brand-muted text-sm mt-2">
-              Comprehensive clinical solutions for children, newborns, and gastroenterology conditions.
+              Comprehensive physiotherapy, rehabilitation, and sports-injury care for patients of all ages.
             </p>
           </div>
 

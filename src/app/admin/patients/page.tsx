@@ -313,7 +313,7 @@ export default function AdminPatientsPage() {
                   <input
                     type="text" value={form.lastVisitReason}
                     onChange={(e) => setForm({ ...form, lastVisitReason: e.target.value })}
-                    placeholder="e.g. Vaccination"
+                    placeholder="e.g. Post-surgical rehab"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal/40"
                   />
                 </div>

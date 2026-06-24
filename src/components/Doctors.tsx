@@ -76,7 +76,7 @@ export default function Doctors({ doctors, lang }: DoctorsProps) {
                     fill
                     sizes="(max-width: 768px) 100vw, 320px"
                     loading="lazy"
-                    quality={72}
+                    quality={70}
                     className="object-cover"
                   />
                 ) : (

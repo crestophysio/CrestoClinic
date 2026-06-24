@@ -8,7 +8,7 @@ const user = process.env.EMAIL_SERVER_USER;
 // no spaces. Pasting the spaced form into .env makes SMTP auth fail silently —
 // strip whitespace defensively (SMTP credentials never contain spaces).
 const pass = (process.env.EMAIL_SERVER_PASSWORD || "").replace(/\s+/g, "");
-const from = process.env.EMAIL_FROM || "noreply@sugamclinic.com";
+const from = process.env.EMAIL_FROM || "noreply@crestophysio.com";
 
 // Strip CR/LF (and clamp length) from any user-controlled value placed into an
 // email header such as the Subject — prevents SMTP header injection.

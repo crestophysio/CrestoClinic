@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Calendar, Clock, User, Phone, Mail, MessageSquare, Baby, CheckCircle2, Loader2, Heart, Stethoscope, ClipboardList } from "lucide-react";
+import { Calendar, Clock, User, Phone, Mail, MessageSquare, CheckCircle2, Loader2, Heart, Stethoscope, ClipboardList } from "lucide-react";
 import { translations, Language } from "@/lib/translations";
 import { TIME_SLOTS, todayInClinicTZ } from "@/lib/slots";
 import { VISIT_REASONS } from "@/lib/visitReasons";
@@ -22,10 +22,6 @@ const bookingSchema = z.object({
   symptoms: z.string().optional(),
   additionalNotes: z.string().optional(),
   message: z.string().optional(),
-  isChild: z.boolean().default(false),
-  childName: z.string().optional(),
-  childDob: z.string().optional(),
-  vaccinationReminderEnabled: z.boolean().default(false),
   // Honeypot: hidden from humans, only bots fill it. Server drops if set.
   website: z.string().optional(),
 });
@@ -53,13 +49,8 @@ export default function BookingForm({ doctors, lang }: BookingFormProps) {
     formState: { errors },
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
-    defaultValues: {
-      isChild: false,
-      vaccinationReminderEnabled: false,
-    },
   });
 
-  const isChildChecked = watch("isChild");
   const selectedDoctor = watch("doctor");
   const selectedDate = watch("date");
 
@@ -285,6 +276,7 @@ export default function BookingForm({ doctors, lang }: BookingFormProps) {
                       <div className="relative">
                         <User className="absolute left-4 top-3.5 w-5 h-5 text-brand-muted/70" />
                         <select
+                          aria-label="Select therapist"
                           {...register("doctor")}
                           className="w-full pl-12 pr-4 py-3 rounded-xl border border-brand-border focus:border-teal focus:outline-none transition-colors text-sm text-brand-ink appearance-none bg-white"
                         >
@@ -310,6 +302,7 @@ export default function BookingForm({ doctors, lang }: BookingFormProps) {
                         <Calendar className="absolute left-4 top-3.5 w-5 h-5 text-brand-muted/70" />
                         <input
                           type="date"
+                          aria-label="Preferred appointment date"
                           min={today}
                           {...register("date")}
                           className="w-full pl-12 pr-4 py-3 rounded-xl border border-brand-border focus:border-teal focus:outline-none transition-colors text-sm text-brand-ink"
@@ -326,6 +319,7 @@ export default function BookingForm({ doctors, lang }: BookingFormProps) {
                       <div className="relative">
                         <Clock className="absolute left-4 top-3.5 w-5 h-5 text-brand-muted/70" />
                         <select
+                          aria-label="Select preferred time slot"
                           {...register("time")}
                           disabled={!slotsReady || slotsLoading}
                           className="w-full pl-12 pr-4 py-3 rounded-xl border border-brand-border focus:border-teal focus:outline-none transition-colors text-sm text-brand-ink appearance-none bg-white disabled:bg-slate-50 disabled:text-brand-muted/60 disabled:cursor-not-allowed"
@@ -364,6 +358,7 @@ export default function BookingForm({ doctors, lang }: BookingFormProps) {
                       <div className="relative">
                         <Stethoscope className="absolute left-4 top-3.5 w-5 h-5 text-brand-muted/70" />
                         <select
+                          aria-label="Reason for visit"
                           {...register("visitReason")}
                           className="w-full pl-12 pr-4 py-3 rounded-xl border border-brand-border focus:border-teal focus:outline-none transition-colors text-sm text-brand-ink appearance-none bg-white"
                         >

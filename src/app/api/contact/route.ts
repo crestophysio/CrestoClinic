@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
     const contactMsg = await ContactMessage.create(data);
 
     // Send email alert in the background via waitUntil so response is instant
-    const clinicEmail = process.env.EMAIL_FROM || "info@sugamclinic.com";
+    const clinicEmail = process.env.EMAIL_FROM || "info@crestophysio.com";
     waitUntil(
       sendEmail({
         to: clinicEmail,

@@ -68,9 +68,9 @@ export default function AllDoctorsView({ doctors }: AllDoctorsViewProps) {
                     src={doc.photo}
                     alt={doc.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 320px"
+                    sizes="(max-width: 768px) 100vw, 384px"
                     loading="lazy"
-                    quality={72}
+                    quality={70}
                     className="object-cover"
                   />
                 ) : (

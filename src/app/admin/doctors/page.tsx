@@ -244,7 +244,7 @@ export default function AdminDoctorsPage() {
                     name="specialization"
                     value={formData.specialization}
                     onChange={handleInputChange}
-                    placeholder="e.g. Pediatric Gastroenterologist"
+                    placeholder="e.g. Neurological Physiotherapist"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
                   />
                 </div>

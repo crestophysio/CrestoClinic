@@ -37,10 +37,6 @@ const bookingSchema = z.object({
   symptoms: z.string().max(2000).optional().default(""),
   additionalNotes: z.string().max(2000).optional().default(""),
   message: z.string().max(2000).optional().default(""),
-  isChild: z.boolean().optional().default(false),
-  childName: z.string().max(120).optional().default(""),
-  childDob: z.string().max(20).optional().default(""),
-  vaccinationReminderEnabled: z.boolean().optional().default(false),
 });
 
 const ALLOWED_STATUSES = ["Pending", "Confirmed", "Completed", "Cancelled"];
@@ -197,7 +193,7 @@ export async function POST(req: NextRequest) {
     const doctorName = doc.name;
 
     // Send emails in background via waitUntil so user booking is instant
-    const clinicEmail = process.env.EMAIL_FROM || "info@sugamclinic.com";
+    const clinicEmail = process.env.EMAIL_FROM || "info@crestophysio.com";
     waitUntil(
       Promise.all([
         sendEmail({
@@ -220,16 +216,6 @@ export async function POST(req: NextRequest) {
               ${data.symptoms ? quoteBlock("Symptoms", nl2br(data.symptoms)) : ""}
               ${data.additionalNotes ? quoteBlock("Additional notes", nl2br(data.additionalNotes)) : ""}
               ${data.message ? quoteBlock("Message", nl2br(data.message)) : ""}
-              ${
-                data.isChild
-                  ? quoteBlock(
-                      "Child details (Vaccination Program)",
-                      `Name: ${esc(data.childName)}<br/>DOB: ${esc(data.childDob)}<br/>Reminders: ${
-                        data.vaccinationReminderEnabled ? "Enabled" : "Disabled"
-                      }`
-                    )
-                  : ""
-              }
             `,
           }),
         }),

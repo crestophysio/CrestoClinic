@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     const result = await ik.upload({
       file,
       fileName: safeName || `upload-${Date.now()}`,
-      folder: "/sugam-clinic",
+      folder: "/cresto-clinic",
       useUniqueFileName: true,
     });
 

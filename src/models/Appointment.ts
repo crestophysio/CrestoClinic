@@ -23,12 +23,6 @@ const AppointmentSchema = new Schema(
     visitReason: { type: String, required: true },
     symptoms: { type: String, default: "" },
     additionalNotes: { type: String, default: "" },
-
-    // Vaccination details (optional, client satisfaction premium feature)
-    isChild: { type: Boolean, default: false },
-    childName: { type: String, default: "" },
-    childDob: { type: String, default: "" },
-    vaccinationReminderEnabled: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

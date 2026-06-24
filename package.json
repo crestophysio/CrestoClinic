@@ -1,13 +1,14 @@
 {
-  "name": "sugam-child-gastro-clinic",
+  "name": "cresto-physiotherapy-clinic",
   "version": "0.1.0",
   "private": true,
+  "description": "Website and admin dashboard for Cresto Physiotherapy Clinic, Bengaluru — physiotherapy, rehabilitation, and online appointment booking.",
   "browserslist": [
-    "chrome >= 92",
-    "edge >= 92",
-    "firefox >= 91",
-    "safari >= 15",
-    "ios_saf >= 15",
+    "chrome >= 93",
+    "edge >= 93",
+    "firefox >= 92",
+    "safari >= 15.4",
+    "ios_saf >= 15.4",
     "not dead"
   ],
   "scripts": {
@@ -38,7 +39,7 @@
     "mongoose": "^8.8.2",
     "next": "^15.0.3",
     "next-auth": "^4.24.10",
-    "nodemailer": "^6.9.16",
+    "nodemailer": "^9.0.1",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

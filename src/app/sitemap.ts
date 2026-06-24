@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // the real domain in production so emitted URLs aren't localhost.
   // Strip any trailing slash so `${base}/services` never produces a "//" URL
   // (the env var is sometimes set with a trailing slash).
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://sugamgastrochildclinic.com").replace(/\/+$/, "");
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://crestophysio.com").replace(/\/+$/, "");
 
   // Defaults so the sitemap still builds if the DB is unreachable.
   let servicesUpdated = new Date();

@@ -1,7 +1,7 @@
-# Sugam Child & Gastro Care Clinic
+# Cresto Physiotherapy Clinic
 
-Production website and admin dashboard for **Sugam Child & Gastro Care Clinic** — a
-pediatric, neonatal and gastroenterology clinic. Public site for patients
+Production website and admin dashboard for **Cresto Physiotherapy Clinic** — a
+physiotherapy and rehabilitation clinic in Bengaluru. Public site for patients
 (services, doctors, blog, gallery, online appointment booking) plus a secured
 admin panel to manage appointments, patients, content and settings.
 
@@ -50,7 +50,7 @@ npm run dev
 
 App runs at http://localhost:3000. Admin login: `/login` (uses `ADMIN_EMAIL` / `ADMIN_PASSWORD`).
 
-> **`.env` must live in this directory** (`sugamclinicfinal/`, the Next project root).
+> **`.env` must live in this directory** (`CrestoPhysiotherapyClinic/`, the Next project root).
 > Next only loads `.env` from the project root — a `.env` in the parent folder is ignored.
 
 ## Environment Variables
@@ -107,4 +107,3 @@ src/
 scripts/       # Admin reset, patient + image migrations
 tests/         # unit + e2e
 ```
-# CrestoPhysiotherapyClinic

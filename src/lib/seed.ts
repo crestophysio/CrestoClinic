@@ -26,9 +26,9 @@ export async function seedDatabase() {
       instagram: "https://instagram.com",
       youtube: "https://youtube.com",
       linkedin: "https://linkedin.com",
-      seoTitle: "Cresto Physiotherapy Clinic - Expert Physio & Rehabilitation in Bengaluru",
-      seoDescription: "Cresto Physiotherapy Clinic provides advanced physiotherapy, manual therapy, neurological rehabilitation and sports injury treatment in Bengaluru.",
-      seoKeywords: "physiotherapy, rehabilitation, manual therapy, sports injury, neuro physio, Bengaluru, Bannerghatta Road",
+      seoTitle: "Best Physiotherapy in Bengaluru | Cresto Clinic",
+      seoDescription: "Expert physiotherapy in Bengaluru. Cresto Physiotherapy Clinic on Bannerghatta Road offers pain relief, rehab & sports therapy. Book your visit today!",
+      seoKeywords: "physiotherapy Bannerghatta Road, physiotherapist in Bengaluru, best physiotherapy clinic in Bengaluru, physiotherapy near me, back pain physiotherapy Bengaluru, knee pain physiotherapy Bengaluru, neck pain physiotherapy Bengaluru, sciatica treatment Bengaluru, frozen shoulder treatment Bengaluru, sports injury rehabilitation Bengaluru, neurological physiotherapy Bengaluru, stroke rehabilitation Bengaluru, post-surgical rehabilitation Bengaluru, manual therapy Bengaluru, dry needling Bengaluru, electrotherapy Bengaluru, posture correction Bengaluru, home visit physiotherapy Bengaluru, physiotherapy Doddakammanahalli, Cresto Physiotherapy Clinic",
     });
   }
 
@@ -208,19 +208,19 @@ export async function seedDatabase() {
   if (galleryCount === 0) {
     await Gallery.create([
       {
-        imageUrl: "https://ik.imagekit.io/sugamclinic/waiting-area.jpg",
+        imageUrl: "https://ik.imagekit.io/senra6374x/waiting-area.jpg",
         category: "gallery",
         caption: "Modern Clinic Reception",
         order: 1,
       },
       {
-        imageUrl: "https://ik.imagekit.io/sugamclinic/consulting-room.jpg",
+        imageUrl: "https://ik.imagekit.io/senra6374x/consulting-room.jpg",
         category: "gallery",
         caption: "Physiotherapy Treatment Room",
         order: 2,
       },
       {
-        imageUrl: "https://ik.imagekit.io/sugamclinic/diagnostic-tools.jpg",
+        imageUrl: "https://ik.imagekit.io/senra6374x/diagnostic-tools.jpg",
         category: "gallery",
         caption: "Advanced Rehabilitation Equipment",
         order: 3,

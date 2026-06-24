@@ -64,7 +64,7 @@ export default function AllGalleryView({ gallery }: AllGalleryViewProps) {
               <span>Tour & Media</span>
             </div>
             <h1 className="font-heading font-bold text-3xl sm:text-4xl text-brand-ink">
-              Sugam Clinic Media Library
+              Cresto Physiotherapy Clinic Gallery
             </h1>
             <p className="text-brand-muted text-sm mt-2">
               Explore our state-of-the-art diagnostic machines, consulting rooms, and clinic ambiance.

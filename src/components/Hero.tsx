@@ -24,7 +24,7 @@ export default function Hero({ settings, lang }: HeroProps) {
       <div className="absolute inset-0 z-0 w-full h-full">
         <Image
           src={heroImage}
-          alt="Sugam Clinic background"
+          alt="Cresto Physiotherapy Clinic"
           fill
           priority
           fetchPriority="high"
@@ -44,7 +44,7 @@ export default function Hero({ settings, lang }: HeroProps) {
         <div className="w-full max-w-3xl mt-2 sm:-mt-6">
           {/* Pill Badge */}
           <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-teal-tint/90 border border-teal/20 text-teal-dark text-xs sm:text-sm font-semibold mb-4 sm:mb-6 w-fit shadow-sm"
+            className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-teal-tint border border-teal/20 text-teal-dark text-xs sm:text-sm font-semibold mb-4 sm:mb-6 w-fit shadow-sm"
           >
             <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal" />
             <span>{t.heroBadge}</span>
@@ -68,7 +68,7 @@ export default function Hero({ settings, lang }: HeroProps) {
 
           {/* Tagline / Description */}
           <p
-            className="text-sm sm:text-lg text-brand-muted leading-relaxed mb-6 sm:mb-8 max-w-xl font-semibold bg-white/60 p-3 rounded-2xl border border-white/30 shadow-sm w-fit"
+            className="text-sm sm:text-lg text-brand-muted leading-relaxed mb-6 sm:mb-8 max-w-xl font-semibold bg-white/95 p-3 rounded-2xl border border-brand-border/40 shadow-sm w-fit"
           >
             {settings?.tagline || t.heroDesc}
           </p>
@@ -94,7 +94,7 @@ export default function Hero({ settings, lang }: HeroProps) {
         </div>
 
         {/* Premium Floating Stats Card at the bottom */}
-        <div className="w-full bg-white/80 rounded-3xl p-5 sm:p-6 border border-white/60 shadow-xl mt-auto">
+        <div className="w-full bg-white rounded-3xl p-5 sm:p-6 border border-brand-border shadow-xl mt-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6">
 
             {/* Rating Stat */}

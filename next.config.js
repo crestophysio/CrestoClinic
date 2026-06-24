@@ -1,19 +1,20 @@
 const path = require('path');
 
-// Content-Security-Policy with a tested allowlist for the third parties this
-// site actually uses: Google Translate (scripts/styles/frames from google +
-// gstatic), ImageKit (images), and inline styles emitted by framer-motion and
-// Next. 'unsafe-inline'/'unsafe-eval' for scripts is required by the Google
-// Translate widget (it injects inline + eval'd code); everything else is locked
-// down. `frame-ancestors 'self'` mirrors X-Frame-Options for modern browsers.
+// Content-Security-Policy locked to the third parties this site actually uses:
+// ImageKit (images + uploads) and Vercel Speed Insights (vitals beacon). Fonts
+// are self-hosted by next/font (font-src 'self'). 'unsafe-inline' is needed for
+// Next's inline bootstrap + framer-motion inline styles; 'unsafe-eval' is kept
+// only because Next's dev HMR evals (production code does not eval). No Google /
+// gstatic / Translate origins — that integration does not exist in this app.
+// `frame-ancestors 'self'` mirrors X-Frame-Options for modern browsers.
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com https://www.gstatic.com https://www.google.com",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com",
-  "img-src 'self' data: blob: https://ik.imagekit.io https://www.google.com https://www.gstatic.com https://translate.googleapis.com https://translate-pa.googleapis.com https://*.gstatic.com",
-  "font-src 'self' data: https://fonts.gstatic.com",
-  "connect-src 'self' https://ik.imagekit.io https://upload.imagekit.io https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com",
-  "frame-src 'self' https://www.google.com https://translate.google.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://ik.imagekit.io",
+  "font-src 'self' data:",
+  "connect-src 'self' https://ik.imagekit.io https://upload.imagekit.io https://vitals.vercel-insights.com",
+  "frame-src 'self'",
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -44,9 +45,13 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Quality values actually used across components (hero/gallery 75, blog 76, migrated 70/72/90).
+    // Quality values actually used across components (hero/gallery 75, blog 76, cards 70/72, migrated 90).
     qualities: [70, 72, 75, 76, 90],
-    minimumCacheTTL: 86400,
+    // Cache optimized variants at the edge for 1 year (the source asset is
+    // content-addressed by ImageKit, so a long TTL is safe).
+    minimumCacheTTL: 31536000,
+    // 384 backs the doctor/team cards so they never pull a 640 candidate at DPR1.
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 320, 384],
     remotePatterns: [
       {
         protocol: 'https',
@@ -59,6 +64,13 @@ const nextConfig = {
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },
+      // Long-lived immutable cache for static media in /public (stable names).
+      {
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|ico|gif|woff|woff2)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
     ];
   },
   // Force a single canonical host: 301 www → apex (non-www). Prevents the
@@ -68,8 +80,8 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'www.sugamgastrochildclinic.com' }],
-        destination: 'https://sugamgastrochildclinic.com/:path*',
+        has: [{ type: 'host', value: 'www.crestophysio.com' }],
+        destination: 'https://crestophysio.com/:path*',
         permanent: true,
       },
     ];

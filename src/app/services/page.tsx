@@ -11,15 +11,15 @@ import { graph, breadcrumbSchema, serviceListSchema, KEYWORDS } from "@/lib/seo"
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Pediatric, Neonatal & Gastroenterology Services in Coimbatore",
+  title: "Physiotherapy Services in Bengaluru",
   description:
-    "Sugam Clinic, Coimbatore services: pediatric consultation, neonatology & newborn care, pediatric gastroenterology, ERCP & endoscopy, liver/hepatology care, and child vaccination (IAP schedule).",
-  keywords: KEYWORDS.services,
+    "Cresto Physiotherapy Clinic, Bengaluru services: manual therapy, neurological rehabilitation, sports injury treatment, post-surgical rehab, electrotherapy, and posture & spine care on Bannerghatta Road.",
+  keywords: [...KEYWORDS.services, ...KEYWORDS.conditions],
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Medical Services in Coimbatore | Sugam Child & Gastro Care Clinic",
+    title: "Physiotherapy Services in Bengaluru | Cresto Physiotherapy Clinic",
     description:
-      "Pediatric, neonatal, gastroenterology, endoscopy, liver care & child vaccination for children in Coimbatore & Venkittapuram.",
+      "Manual therapy, neuro rehab, sports injury treatment, post-surgical recovery, electrotherapy & posture care in Bengaluru, Bannerghatta Road.",
     url: "/services",
     type: "website",
   },
@@ -40,15 +40,6 @@ export default async function ServicesPage() {
   } catch (error) {
     console.error("Services page db error:", error);
   }
-
-  const finalSettings = settings || {
-    clinicName: "Sugam Child & Gastro Care Clinic",
-    tagline: "Expert Pediatric, Neonatal & Gastroenterology care in Venkittapuram, Coimbatore",
-    address: "Sugam Child & Gastro Care Clinic, Ambethkar Road, Near Sindhi Vidyalaya, Venkittapuram, Coimbatore, Tamil Nadu 641025",
-    phone: "+91 94432 12345",
-    email: "contact@sugamclinic.com",
-    whatsapp: "+91 94432 12345",
-  };
 
   const serialize = (arr: any[]) =>
     arr.map((item) => ({

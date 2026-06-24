@@ -81,7 +81,7 @@ export const authOptions: NextAuthOptions = {
 
         return {
           id: "admin",
-          name: "Sugam Clinic Admin",
+          name: "Cresto Clinic Admin",
           email: normalizeEmail(credentials.email),
           role: "admin",
         };

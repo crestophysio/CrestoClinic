@@ -11,7 +11,7 @@ describe("doctorCreateSchema", () => {
   const valid = {
     name: "Dr A",
     qualification: "MBBS",
-    specialization: "Pediatrics",
+    specialization: "Physiotherapy",
     experience: 10,
     description: "x",
     consultingTime: "9-5",
@@ -40,13 +40,13 @@ describe("doctorCreateSchema", () => {
 describe("settingsUpdateSchema", () => {
   it("strips internal/unknown fields (mass-assignment guard)", () => {
     const out = settingsUpdateSchema.parse({
-      clinicName: "Sugam",
+      clinicName: "Cresto",
       _id: "x",
       __v: 5,
       createdAt: "now",
       role: "admin",
     });
-    expect(out).toEqual({ clinicName: "Sugam" });
+    expect(out).toEqual({ clinicName: "Cresto" });
   });
 });
 

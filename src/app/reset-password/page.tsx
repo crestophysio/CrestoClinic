@@ -122,7 +122,7 @@ export default function ResetPasswordPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@sugamclinic.com"
+                  placeholder="admin@crestophysio.com"
                   className="w-full pl-12 pr-4 py-3 rounded-xl border border-brand-border focus:border-teal focus:outline-none text-sm text-brand-ink"
                 />
               </div>

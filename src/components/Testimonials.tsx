@@ -253,9 +253,9 @@ export default function Testimonials({ reviews, lang }: TestimonialsProps) {
 
                   {/* Author */}
                   <div className="border-t border-brand-border/40 pt-2.5 mt-auto">
-                    <h4 className="font-heading font-bold text-xs text-brand-ink">
+                    <p className="font-heading font-bold text-xs text-brand-ink">
                       {rev.name}
-                    </h4>
+                    </p>
                     <p className="text-[9px] text-brand-muted mt-0.5">{t.reviewsVerified}</p>
                   </div>
                 </div>
@@ -359,6 +359,7 @@ export default function Testimonials({ reviews, lang }: TestimonialsProps) {
                           <button
                             key={star}
                             type="button"
+                            aria-label={`Rate ${star} star${star === 1 ? "" : "s"}`}
                             onClick={() => setRating(star)}
                             onMouseEnter={() => setHoveredRating(star)}
                             onMouseLeave={() => setHoveredRating(null)}

@@ -97,7 +97,7 @@ export default function ImageUploader({
       form.append("signature", auth.signature);
       form.append("expire", String(auth.expire));
       form.append("token", auth.token);
-      form.append("folder", "/sugam-clinic");
+      form.append("folder", "/cresto-clinic");
       form.append("useUniqueFileName", "true");
 
       const upRes = await fetch(

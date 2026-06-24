@@ -11,15 +11,15 @@ import { graph, breadcrumbSchema, KEYWORDS } from "@/lib/seo";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Clinic Gallery — Venkittapuram, Coimbatore",
+  title: "Clinic Gallery — Bannerghatta Road, Bengaluru",
   description:
-    "Virtual tour of Sugam Child & Gastro Care Clinic on Ambethkar Road, Venkittapuram, Coimbatore — child-friendly waiting areas, modern diagnostic & endoscopy facilities, and our care team.",
+    "Tour Cresto Physiotherapy Clinic on Bannerghatta Road, Bengaluru — modern treatment rooms, advanced rehabilitation equipment, and our physiotherapy care team.",
   keywords: KEYWORDS.gallery,
   alternates: { canonical: "/gallery" },
   openGraph: {
-    title: "Gallery | Sugam Child & Gastro Care Clinic, Coimbatore",
+    title: "Gallery | Cresto Physiotherapy Clinic, Bengaluru",
     description:
-      "Photos of our Coimbatore clinic facilities, child-friendly waiting areas, and modern diagnostic tools.",
+      "Photos of our Bengaluru clinic, treatment rooms, and advanced rehabilitation equipment.",
     url: "/gallery",
     type: "website",
   },
@@ -41,15 +41,6 @@ export default async function GalleryPage() {
     console.error("Gallery page db error:", error);
   }
 
-  const finalSettings = settings || {
-    clinicName: "Sugam Child & Gastro Care Clinic",
-    tagline: "Expert Pediatric, Neonatal & Gastroenterology care in Venkittapuram, Coimbatore",
-    address: "Sugam Child & Gastro Care Clinic, Ambethkar Road, Near Sindhi Vidyalaya, Venkittapuram, Coimbatore, Tamil Nadu 641025",
-    phone: "+91 94432 12345",
-    email: "contact@sugamclinic.com",
-    whatsapp: "+91 94432 12345",
-  };
-
   const serialize = (arr: any[]) =>
     arr.map((item) => ({
       ...item,
@@ -66,7 +57,7 @@ export default async function GalleryPage() {
     ]),
     {
       "@type": "ImageGallery",
-      name: "Sugam Clinic Gallery",
+      name: "Cresto Physiotherapy Clinic Gallery",
       url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/gallery`,
       ...(serializedGallery.length && {
         image: serializedGallery

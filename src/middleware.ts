@@ -34,9 +34,20 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // secureCookie MUST match how NextAuth actually named the cookie when it was
+  // set, or getToken looks for the wrong name and never finds the token.
+  // NextAuth uses the `__Secure-` prefix only when it runs over https — i.e. on
+  // Vercel, or when NEXTAUTH_URL is an https origin. Keying off NODE_ENV instead
+  // breaks a local production build (`npm start` over http://localhost): the app
+  // sets the non-secure cookie but the gate hunts for the secure one, so every
+  // admin request bounces back to /login even after a correct sign-in.
+  const secureCookie =
+    process.env.VERCEL === "1" ||
+    (process.env.NEXTAUTH_URL ?? "").startsWith("https://");
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
+    secureCookie,
   });
   const isAdmin = (token as { role?: string } | null)?.role === "admin";
 

@@ -11,15 +11,15 @@ import { graph, breadcrumbSchema, blogListSchema, KEYWORDS } from "@/lib/seo";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Child Health Blog — Newborn Care, Vaccination & Nutrition Tips",
+  title: "Physiotherapy & Rehab Blog — Expert Recovery Tips",
   description:
-    "Doctor-written health advice from Sugam Clinic, Coimbatore: newborn jaundice, child stomach pain & acid reflux, IAP vaccination schedule, growth charts, and when to start solid food.",
+    "Doctor-written physiotherapy advice from Cresto Physiotherapy Clinic, Bengaluru: back pain relief, post-stroke rehabilitation, sports injury prevention, posture correction, and recovery exercises.",
   keywords: KEYWORDS.blog,
   alternates: { canonical: "/blogs" },
   openGraph: {
-    title: "Child Health Blog | Sugam Child & Gastro Care Clinic",
+    title: "Physiotherapy & Rehab Blog | Cresto Physiotherapy Clinic",
     description:
-      "Newborn care tips, IAP vaccination schedule, jaundice & acid reflux guidance, and answers to common pediatric questions.",
+      "Back pain exercises, neuro rehab guidance, sports injury prevention, and recovery tips from our physiotherapists.",
     url: "/blogs",
     type: "website",
   },
@@ -40,15 +40,6 @@ export default async function BlogsPage() {
   } catch (error) {
     console.error("Blogs page db error:", error);
   }
-
-  const finalSettings = settings || {
-    clinicName: "Sugam Child & Gastro Care Clinic",
-    tagline: "Expert Pediatric, Neonatal & Gastroenterology care in Venkittapuram, Coimbatore",
-    address: "Sugam Child & Gastro Care Clinic, Ambethkar Road, Near Sindhi Vidyalaya, Venkittapuram, Coimbatore, Tamil Nadu 641025",
-    phone: "+91 94432 12345",
-    email: "contact@sugamclinic.com",
-    whatsapp: "+91 94432 12345",
-  };
 
   const serialize = (arr: any[]) =>
     arr.map((item) => ({

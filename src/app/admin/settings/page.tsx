@@ -338,7 +338,7 @@ export default function AdminSettingsPage() {
               name="seoKeywords"
               value={settings.seoKeywords || ""}
               onChange={handleChange}
-              placeholder="pediatrician, gastrologist, neonate care"
+              placeholder="physiotherapy, manual therapy, sports injury, neuro rehab"
               className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
             />
           </div>
@@ -365,7 +365,7 @@ export default function AdminSettingsPage() {
                 name="aboutBadge"
                 value={settings.aboutBadge || ""}
                 onChange={handleChange}
-                placeholder="About Sugam Clinic"
+                placeholder="About Cresto Physiotherapy Clinic"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
               />
             </div>
@@ -376,7 +376,7 @@ export default function AdminSettingsPage() {
                 name="aboutTitle"
                 value={settings.aboutTitle || ""}
                 onChange={handleChange}
-                placeholder="Dedicated pediatric & gastro care under one roof"
+                placeholder="Expert physiotherapy & rehabilitation under one roof"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
               />
             </div>

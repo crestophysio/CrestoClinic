@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import FloatingActions from "./FloatingActions";
-import LoadingScreen from "./LoadingScreen";
 
 interface PublicLayoutWrapperProps {
   settings: any;
@@ -22,7 +21,6 @@ export default function PublicLayoutWrapper({ settings, children }: PublicLayout
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-white">
-      <LoadingScreen logoUrl={settings?.logo} clinicName={settings?.clinicName} />
       <Navbar settings={settings} lang="en" />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} lang="en" />

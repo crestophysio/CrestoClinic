@@ -153,9 +153,10 @@ export default function GalleryGrid({ gallery, lang }: GalleryGridProps) {
               <div className="flex justify-center mt-10 sm:mt-12">
                 <Link
                   href="/gallery"
+                  aria-label="See more clinic photos in the full gallery"
                   className="group flex items-center gap-2 rounded-full border border-teal bg-white px-7 py-3 sm:px-8 sm:py-3.5 text-sm font-bold text-teal shadow-sm transition-all duration-300 hover:bg-teal hover:text-white active:scale-95 cursor-pointer"
                 >
-                  <span>{lang === "en" ? "See More" : "மேலும் காண்க"}</span>
+                  <span>{lang === "en" ? "See more clinic photos" : "மேலும் புகைப்படங்கள் காண்க"}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>

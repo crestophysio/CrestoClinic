@@ -127,7 +127,7 @@ export default function AdminServicesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-heading font-bold text-3xl text-slate-800">Services Management</h1>
-          <p className="text-sm text-slate-500 mt-1">Manage clinic departments, child care plans, and specialized diagnostics.</p>
+          <p className="text-sm text-slate-500 mt-1">Manage physiotherapy services, treatment programs, and rehabilitation specialties.</p>
         </div>
         <button
           onClick={handleOpenAdd}
@@ -190,7 +190,7 @@ export default function AdminServicesPage() {
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  placeholder="e.g. Newborn Growth Monitoring"
+                  placeholder="e.g. Manual Therapy"
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-teal text-sm text-slate-800"
                 />
               </div>

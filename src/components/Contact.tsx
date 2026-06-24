@@ -65,10 +65,10 @@ export default function Contact({ settings, lang }: ContactProps) {
   };
 
   const address = settings?.address || "No.70/1, Benaka Plaza, Doddakammanahalli, Bannerghatta Road, Bengaluru";
-  const phone = settings?.phone || "+91 94432 12345";
+  const phone = settings?.phone || "+91 98765 43210";
   const email = settings?.email || "info@crestophysio.com";
   const workingHours = settings?.workingHours || "Mon - Sat: 9:00 AM - 8:30 PM";
-  let mapsUrl = settings?.mapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5709971936357!2d80.21852877593259!3d13.062402113203498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267b14dcd69eb%3A0xe54e604f3263a2!2sApollo%20Children&#39;s%20Hospitals!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";
+  let mapsUrl = settings?.mapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0!2d77.5946!3d12.8973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6b0a0a0a0a0a%3A0x0!2sBannerghatta+Road%2C+Bengaluru!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";
   if (mapsUrl.includes("<iframe")) {
     const srcMatch = mapsUrl.match(/src="([^"]+)"/);
     if (srcMatch && srcMatch[1]) {
@@ -133,7 +133,7 @@ export default function Contact({ settings, lang }: ContactProps) {
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
-                      <h5 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactLocation}</h5>
+                      <h4 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactLocation}</h4>
                       <p className="text-xs sm:text-sm text-brand-muted leading-relaxed">{address}</p>
                     </div>
                   </div>
@@ -144,7 +144,7 @@ export default function Contact({ settings, lang }: ContactProps) {
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
-                      <h5 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactCall}</h5>
+                      <h4 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactCall}</h4>
                       <a href={`tel:${phone}`} className="text-xs sm:text-sm text-teal-dark font-bold hover:underline block">{phone}</a>
                     </div>
                   </div>
@@ -155,7 +155,7 @@ export default function Contact({ settings, lang }: ContactProps) {
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <h5 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactMail}</h5>
+                      <h4 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactMail}</h4>
                       <a href={`mailto:${email}`} className="text-xs sm:text-sm text-pink-safe font-bold hover:underline block">{email}</a>
                     </div>
                   </div>
@@ -166,7 +166,7 @@ export default function Contact({ settings, lang }: ContactProps) {
                       <Clock className="w-5 h-5" />
                     </div>
                     <div>
-                      <h5 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactHours}</h5>
+                      <h4 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactHours}</h4>
                       <p className="text-xs sm:text-sm text-brand-muted leading-relaxed">{workingHours}</p>
                     </div>
                   </div>
