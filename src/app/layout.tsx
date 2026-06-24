@@ -39,8 +39,18 @@ const siteDescription =
 const siteSocialDescription =
   "Looking for a physiotherapist in Bengaluru? Cresto Physiotherapy Clinic on Bannerghatta Road offers expert manual therapy, neuro rehab, sports injury treatment, post-surgical recovery, and posture care. Book your consultation today.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const settings: any = await getLayoutSettings();
+  // Favicon = the clinic logo (or an explicit favicon if set in admin). When
+  // neither exists, leaving `icons` undefined lets Next fall back to the
+  // generated app/icon.tsx ("C" mark). Cached fetch — no extra DB round-trip.
+  const faviconUrl = settings?.favicon || settings?.logo;
+
+  return {
   metadataBase: new URL(siteUrl),
+  ...(faviconUrl && {
+    icons: { icon: faviconUrl, shortcut: faviconUrl, apple: faviconUrl },
+  }),
   title: {
     default: homeTitle,
     template: `%s | ${siteTitle}`,
@@ -85,7 +95,8 @@ export const metadata: Metadata = {
     },
   },
   formatDetection: { telephone: true, email: true, address: true },
-};
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -93,16 +104,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const settings: any = await getLayoutSettings();
-  // Favicon: prefer an explicit favicon, else reuse the header logo, else the
-  // static fallback. Keeps the tab icon in sync with the brand logo by default.
-  const faviconUrl = settings?.favicon || settings?.logo || "/favicon.ico";
+  // Favicon is handled in generateMetadata() above (logo → icon.tsx fallback).
   const serializedSettings = settings ? JSON.parse(JSON.stringify(settings)) : null;
 
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <link rel="icon" href={faviconUrl} />
-      </head>
       <body className={`${outfit.variable} ${spaceGrotesk.variable} antialiased`}>
         <Providers>
           <PublicLayoutWrapper settings={serializedSettings}>
