@@ -190,6 +190,30 @@ export const KEYWORDS = {
     "clinic tour Bengaluru",
     "physiotherapy treatment room Bengaluru",
   ],
+  // Extra long-tail home-page terms — 20 fresh, non-duplicate phrases folded
+  // into the homepage `keywords` meta to widen condition + service coverage.
+  additional: [
+    "physiotherapy treatment in Bengaluru",
+    "rehabilitation centre in Bengaluru",
+    "physiotherapy doctor in Bengaluru",
+    "spine physiotherapy Bengaluru",
+    "shoulder pain physiotherapy Bengaluru",
+    "joint pain physiotherapy Bengaluru",
+    "muscle strain treatment Bengaluru",
+    "chronic pain physiotherapy Bengaluru",
+    "post accident rehabilitation Bengaluru",
+    "physiotherapy at home Bengaluru",
+    "best rehabilitation clinic Bengaluru",
+    "physiotherapy for paralysis Bengaluru",
+    "physiotherapy for vertigo Bengaluru",
+    "physiotherapy for diabetic neuropathy Bengaluru",
+    "pediatric rehabilitation Bengaluru",
+    "physiotherapy for shoulder pain near me",
+    "physiotherapy for sciatica near me",
+    "physiotherapy clinic in South Bengaluru",
+    "weekend physiotherapy clinic Bengaluru",
+    "physiotherapy for senior citizens Bengaluru",
+  ],
 };
 
 // Absolute URL helper — Schema.org wants fully-qualified URLs.

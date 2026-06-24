@@ -65,6 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ...KEYWORDS.conditions.slice(0, 10),
       ...KEYWORDS.local.slice(0, 8),
       ...KEYWORDS.commercial.slice(0, 6),
+      ...KEYWORDS.additional,
     ])
   ),
   alternates: { canonical: "/" },

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Youtube, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Language } from "@/lib/translations";
 import ObfuscatedEmail from "@/components/ObfuscatedEmail";
+import { CLINIC_LOCATION } from "@/lib/seo";
 
 interface FooterProps {
   settings: any;
@@ -146,8 +147,24 @@ export default function Footer({ settings, lang }: FooterProps) {
           </div>
         </div>
 
+        {/* Areas We Serve — boosts local SEO (neighbourhood coverage) and adds
+            the H5/H6 header levels the page was missing. */}
+        <div className="border-t border-white/5 mt-12 pt-8">
+          <h5 className="font-heading font-semibold text-base text-white mb-1">
+            {lang === "en" ? "Areas We Serve" : "சேவை செய்யும் பகுதிகள்"}
+          </h5>
+          <h6 className="font-heading font-medium text-[11px] text-pink uppercase tracking-wider mb-3">
+            {lang === "en"
+              ? "Physiotherapy & Rehabilitation across South Bengaluru"
+              : "தெற்கு பெங்களூரு முழுவதும் பிசியோதெரபி & மறுவாழ்வு"}
+          </h6>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            {CLINIC_LOCATION.areaServed.join(" · ")}
+          </p>
+        </div>
+
         {/* Divider & Copyright */}
-        <div className="border-t border-white/5 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <div className="border-t border-white/5 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
           <p>© {currentYear} {clinicName}. All Rights Reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/login" className="hover:text-pink transition-colors">
