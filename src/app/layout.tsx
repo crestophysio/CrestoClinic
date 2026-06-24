@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import PublicLayoutWrapper from "@/components/PublicLayoutWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 import { getLayoutSettings } from "@/lib/layoutSettings";
 import { KEYWORDS } from "@/lib/seo";
@@ -27,9 +28,11 @@ const spaceGrotesk = Space_Grotesk({
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://crestophysio.com").replace(/\/+$/, "");
 const siteTitle = "Cresto Physiotherapy Clinic";
-// Homepage <title> — top commercial + local terms, kept under ~50 chars so it
-// never truncates in the SERP (from the local SEO keyword pack).
-const homeTitle = "Best Physiotherapy in Bengaluru | Cresto Clinic";
+// Homepage <title> — top commercial + local terms. Kept in the 50–60 char
+// sweet spot (SEO best practice / audit) so it neither truncates in the SERP
+// nor wastes ranking real estate. Leads with the "physiotherapy clinic" +
+// "Bengaluru" keywords, then the brand.
+const homeTitle = "Best Physiotherapy Clinic in Bengaluru | Cresto Physio";
 const siteDescription =
   "Expert physiotherapy in Bengaluru. Cresto Physiotherapy Clinic on Bannerghatta Road offers pain relief, rehab & sports therapy. Book your visit today!";
 // Question-led variant — higher click-through on social shares.
@@ -109,6 +112,10 @@ export default async function RootLayout({
               Off-Vercel (local dev, self-host) that route 404s and the client
               logs a "Failed to load script" error — so only mount on Vercel. */}
           {process.env.VERCEL && <SpeedInsights />}
+          {/* GA4 — only when a Measurement ID is configured. */}
+          {process.env.NEXT_PUBLIC_GA_ID && (
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          )}
         </Providers>
       </body>
     </html>

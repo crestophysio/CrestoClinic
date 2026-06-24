@@ -7,6 +7,7 @@ import * as z from "zod";
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Loader2, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { translations, Language } from "@/lib/translations";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -67,6 +68,10 @@ export default function Contact({ settings, lang }: ContactProps) {
   const address = settings?.address || "No.70/1, Benaka Plaza, Doddakammanahalli, Bannerghatta Road, Bengaluru";
   const phone = settings?.phone || "+91 98765 43210";
   const email = settings?.email || "info@crestophysio.com";
+  // base64 so the plain address stays out of the (server-)rendered HTML; the
+  // ObfuscatedEmail component decodes it client-side. btoa exists in both the
+  // browser and the Node SSR runtime.
+  const emailEncoded = btoa(email);
   const workingHours = settings?.workingHours || "Mon - Sat: 9:00 AM - 8:30 PM";
   let mapsUrl = settings?.mapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0!2d77.5946!3d12.8973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6b0a0a0a0a0a%3A0x0!2sBannerghatta+Road%2C+Bengaluru!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";
   if (mapsUrl.includes("<iframe")) {
@@ -156,7 +161,11 @@ export default function Contact({ settings, lang }: ContactProps) {
                     </div>
                     <div>
                       <h4 className="text-xs font-bold text-brand-ink uppercase tracking-wider mb-1">{t.contactMail}</h4>
-                      <a href={`mailto:${email}`} className="text-xs sm:text-sm text-pink-safe font-bold hover:underline block">{email}</a>
+                      <ObfuscatedEmail
+                        data={emailEncoded}
+                        className="text-xs sm:text-sm text-pink-safe font-bold hover:underline block"
+                        label="Email us"
+                      />
                     </div>
                   </div>
 

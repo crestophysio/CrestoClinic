@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Facebook, Instagram, Youtube, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Language } from "@/lib/translations";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 interface FooterProps {
   settings: any;
@@ -11,6 +12,14 @@ interface FooterProps {
 export default function Footer({ settings, lang }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const clinicName = settings?.clinicName || "Cresto Physiotherapy Clinic";
+  // Full street address in clear text aids Local SEO (NAP). Fall back to the
+  // real clinic address rather than a placeholder when settings are sparse.
+  const address =
+    settings?.address ||
+    "No.70/1, Benaka Plaza, Doddakammanahalli, Bannerghatta Road, Bengaluru";
+  const email = settings?.email || "info@crestophysio.com";
+  // base64 so the plain address never appears in the server-rendered HTML.
+  const emailEncoded = Buffer.from(email).toString("base64");
 
   return (
     <footer className="bg-teal text-white pt-16 pb-8 border-t border-white/5">
@@ -107,7 +116,7 @@ export default function Footer({ settings, lang }: FooterProps) {
             <div className="flex flex-col gap-4 text-sm text-gray-400">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-pink shrink-0 mt-0.5" />
-                <span>{settings?.address || "Clinic Address"}</span>
+                <span>{address}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-pink shrink-0" />
@@ -117,9 +126,11 @@ export default function Footer({ settings, lang }: FooterProps) {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-pink shrink-0" />
-                <a href={`mailto:${settings?.email}`} className="hover:text-pink transition-colors">
-                  {settings?.email || "info@crestophysio.com"}
-                </a>
+                <ObfuscatedEmail
+                  data={emailEncoded}
+                  className="hover:text-pink transition-colors"
+                  label="Email us"
+                />
               </div>
             </div>
           </div>
