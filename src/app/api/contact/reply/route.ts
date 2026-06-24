@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
 
     const result = await sendEmail({
       to: msg.email,
+      replyTo: process.env.EMAIL_FROM || "info@crestophysio.com",
       subject: replySubject,
       html,
     });

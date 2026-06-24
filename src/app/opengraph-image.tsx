@@ -6,7 +6,6 @@ import { ImageResponse } from "next/og";
 // supports flexbox + inline styles — no grid, every multi-child div needs
 // display:'flex'.
 
-export const runtime = "edge";
 export const alt = "Cresto Physiotherapy Clinic — Bengaluru";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

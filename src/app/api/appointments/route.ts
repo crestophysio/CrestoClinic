@@ -198,10 +198,10 @@ export async function POST(req: NextRequest) {
       Promise.all([
         sendEmail({
           to: clinicEmail,
-          subject: sanitizeHeader(`New Appointment Booking Request - ${data.name}`),
+          subject: sanitizeHeader(`New Appointment: ${data.name} - ${data.date} ${data.time}`),
           html: renderEmail({
             title: "New appointment booking request",
-            previewText: `New booking from ${data.name}`,
+            previewText: `${data.name} booked ${data.time} on ${data.date} with ${doctorName}`,
             bodyHtml: `
               <p style="margin:0 0 8px;">A new appointment request was submitted.</p>
               ${infoTable(
@@ -221,20 +221,23 @@ export async function POST(req: NextRequest) {
         }),
         sendEmail({
           to: data.email,
-          subject: `Cresto Physiotherapy Clinic - Appointment Request Received`,
+          replyTo: clinicEmail,
+          subject: `Appointment Request Received - Cresto Physiotherapy Clinic`,
           html: renderEmail({
-            title: "We've received your appointment request",
-            previewText: "Your appointment request has been received",
+            title: "We have received your appointment request",
+            previewText: `Hi ${data.name}, your appointment request for ${data.date} at ${data.time} is pending confirmation.`,
             bodyHtml: `
               <p style="margin:0 0 12px;">Dear ${esc(data.name)},</p>
-              <p style="margin:0 0 8px;">Thank you for choosing us. We have received your booking request and our staff will contact you shortly to confirm.</p>
+              <p style="margin:0 0 8px;">Thank you for choosing Cresto Physiotherapy Clinic. We have received your appointment request and our staff will contact you shortly to confirm your booking.</p>
               ${infoTable(
                 infoRow("Therapist", doctorName) +
                 infoRow("Date", data.date) +
                 infoRow("Time slot", data.time) +
                 infoRow("Status", "Pending confirmation")
               )}
+              <p style="margin:12px 0 8px;">If you need to make changes or have questions, please call us or reply to this email.</p>
             `,
+            footerNote: "You are receiving this email because you submitted an appointment request on our website.",
           }),
         })
       ]).catch(err => {
@@ -264,23 +267,26 @@ export async function PUT(req: NextRequest) {
     
     if (appointment) {
       // Send update email to patient
+      const clinicEmailForReply = process.env.EMAIL_FROM || "info@crestophysio.com";
       await sendEmail({
         to: appointment.email,
-        subject: `Cresto Physiotherapy Clinic - Appointment ${status}`,
+        replyTo: clinicEmailForReply,
+        subject: `Your appointment is ${status.toLowerCase()} - Cresto Physiotherapy Clinic`,
         html: renderEmail({
           title: "Appointment status update",
-          previewText: `Your appointment is now ${status}`,
+          previewText: `Your appointment on ${appointment.date} at ${appointment.time} is now ${status}`,
           bodyHtml: `
             <p style="margin:0 0 12px;">Dear ${esc(appointment.name)},</p>
             <p style="margin:0 0 8px;">Your appointment status has been updated to <strong>${esc(status)}</strong>.</p>
             ${infoTable(
-              infoRow("Therapist", appointment.doctor ? appointment.doctor.name : "Clinic Therapist") +
+              infoRow("Therapist", appointment.doctor ? (appointment.doctor as any).name : "Clinic Therapist") +
               infoRow("Date", appointment.date) +
               infoRow("Time", appointment.time) +
               infoRow("Status", status)
             )}
             <p style="margin:12px 0 0;">If you have any questions, please contact the clinic.</p>
           `,
+          footerNote: "You are receiving this email because you have an appointment with Cresto Physiotherapy Clinic.",
         }),
       });
     }

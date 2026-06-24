@@ -4,7 +4,6 @@ import { ImageResponse } from "next/og";
 // on the brand teal disc, matching the navbar logo fallback. Used only when the
 // admin hasn't set a custom favicon in Settings (layout.tsx prefers that).
 
-export const runtime = "edge";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 

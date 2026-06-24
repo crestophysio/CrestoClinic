@@ -10,6 +10,12 @@ const CLINIC_NAME = "Cresto Physiotherapy Clinic";
 const CLINIC_TAGLINE = "Expert Physiotherapy & Rehabilitation Care in Bengaluru";
 const CLINIC_PHONE = process.env.ADMIN_PHONE || "+91 98765 43210";
 const CLINIC_EMAIL = process.env.EMAIL_FROM || "info@crestophysio.com";
+// A real postal address in the footer is a legitimacy signal mailbox providers
+// (and CAN-SPAM / bulk-sender guidelines) look for — it nudges mail toward the
+// inbox and away from "anonymous automated sender" heuristics.
+const CLINIC_ADDRESS =
+  process.env.CLINIC_ADDRESS ||
+  "No.70/1, Benaka Plaza, Doddakammanahalli, Bannerghatta Road, Bengaluru, Karnataka";
 
 // Brand palette (kept in sync with the site / tailwind config).
 const TEAL = "#1B3A6B";
@@ -105,6 +111,9 @@ export function renderEmail({ title, bodyHtml, previewText, footerNote }: Render
           <tr>
             <td style="padding:18px 28px;background:#F8FAFA;border-top:1px solid ${BORDER};">
               <div style="font-size:13px;font-weight:bold;color:${INK};">${esc(CLINIC_NAME)}</div>
+              <div style="font-size:12px;color:${MUTED};margin-top:4px;">
+                ${esc(CLINIC_ADDRESS)}
+              </div>
               <div style="font-size:12px;color:${MUTED};margin-top:4px;">
                 Phone: ${esc(CLINIC_PHONE)} &nbsp;&bull;&nbsp; Email: ${esc(CLINIC_EMAIL)}
               </div>
