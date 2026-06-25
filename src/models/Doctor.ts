@@ -8,7 +8,7 @@ const DoctorSchema = new Schema(
     experience: { type: Number, required: true },
     description: { type: String, required: true },
     consultingTime: { type: String, required: true },
-    phone: { type: String, required: true },
+    phone: { type: String, default: "" },
     photo: { type: String, default: "" },
     facebook: { type: String, default: "" },
     instagram: { type: String, default: "" },

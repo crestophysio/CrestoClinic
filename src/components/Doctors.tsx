@@ -108,10 +108,12 @@ export default function Doctors({ doctors, lang }: DoctorsProps) {
                     <Clock className="w-4 h-4 text-teal shrink-0" />
                     <span>{doc.consultingTime}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-brand-ink font-semibold">
-                    <Phone className="w-4 h-4 text-teal shrink-0" />
-                    <a href={`tel:${doc.phone}`} className="hover:text-teal transition-colors">{doc.phone}</a>
-                  </div>
+                  {doc.phone && (
+                    <div className="flex items-center gap-2 text-xs text-brand-ink font-semibold">
+                      <Phone className="w-4 h-4 text-teal shrink-0" />
+                      <a href={`tel:${doc.phone}`} className="hover:text-teal transition-colors">{doc.phone}</a>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

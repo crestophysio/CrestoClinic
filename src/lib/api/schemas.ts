@@ -29,7 +29,7 @@ export const doctorCreateSchema = z.object({
   experience: z.coerce.number().int().min(0).max(100),
   description: str(5000).min(1),
   consultingTime: str(200).min(1),
-  phone: str(40).min(1),
+  phone: optStr(40),
   photo: optStr(2000),
   facebook: optStr(2000),
   instagram: optStr(2000),
